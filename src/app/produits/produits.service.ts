@@ -1,3 +1,6 @@
+import {EventEmitter, Injectable} from "@angular/core";
+import {CataloguesService} from "../catalogues/catalogues.service";
+
 export interface ProduitsModel {
   typeCategorie: string,
   contenuCategorieProduits: {
@@ -13,6 +16,7 @@ export interface ProduitModel {
   description: string,
 }
 
+@Injectable()
 export class ProduitsService {
   produits: ProduitsModel[] = [
     {
@@ -162,7 +166,23 @@ export class ProduitsService {
     }
   ];
 
+  produitsUpdate: EventEmitter<null> = new EventEmitter<null>()
+
+  constructor() {
+  }
+
   getProduits(typeCategorie: string): ProduitModel[] {
     return (this.produits.filter((produits) => produits.typeCategorie === typeCategorie))[0]["contenuCategorieProduits"];
+  }
+
+  setProduits(currentCatalogue: string, produit: ProduitModel) {
+
+    this.produits.forEach((cat) => {
+      if (cat.typeCategorie === currentCatalogue) {
+        cat.contenuCategorieProduits = cat.contenuCategorieProduits.filter((p) => p.id !== produit.id)
+      }
+    });
+
+
   }
 }

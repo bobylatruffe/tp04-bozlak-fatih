@@ -1,4 +1,4 @@
-import {EventEmitter} from "@angular/core";
+import {EventEmitter, Injectable} from "@angular/core";
 
 export interface CataloguesModel {
   id: number,
@@ -7,7 +7,10 @@ export interface CataloguesModel {
   imgPath: string
 }
 
+@Injectable()
 export class CataloguesService {
+  currentCatalogue: string = "";
+
   cataloguesItems: CataloguesModel[] = [
     {
       "id": 1,
@@ -41,7 +44,8 @@ export class CataloguesService {
     return this.cataloguesItems;
   }
 
-  onCategorieSelectionnee(whichCategorie:string) {
+  onCategorieSelectionnee(whichCategorie: string) {
+    this.currentCatalogue = whichCategorie;
     this.categorieSelectionnee.emit(whichCategorie);
   }
 }

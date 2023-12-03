@@ -1,0 +1,27 @@
+.panier {
+  position: relative;
+  /*border: solid 1px red;*/
+  display: inline-block;
+}
+
+.contenu {
+  border: solid 1px red;
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+}
+
+.contenu p {
+  position: relative;
+}
+
+
+p {
+  position: absolute;
+  bottom: -5px;
+  right: 0px;
+  color: red;
+  font-weight: bold;
+}

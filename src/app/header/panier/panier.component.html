@@ -1,0 +1,10 @@
+<div class="contenu" #contenu style="display: none">
+  <p *ngFor="let produit of produitsDansPanier">{{produit.titre}}</p>
+</div>
+
+<div class="panier" (click)="afficherPanier(contenu)" (mouseenter)="afficherPanier(contenu)" (mouseleave)="masquerPanier(contenu)">
+  <img src="assets/panier.jpg" width="30px" height="30px"/>
+  <p>{{nbProduitsDansPanier}}</p>
+
+</div>
+

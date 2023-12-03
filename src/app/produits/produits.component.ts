@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CataloguesService} from "../catalogues/catalogues.service";
-import {ProduitModel, ProduitsService} from "./produits.service";
+import {ProduitModel, ProduitsModel, ProduitsService} from "./produits.service";
 
 @Component({
   selector: 'app-produits',
@@ -18,5 +18,9 @@ export class ProduitsComponent implements OnInit {
     this.cataloguesService.categorieSelectionnee.subscribe((typeCategorie) => {
       this.produits = this.produitsService.getProduits(typeCategorie);
     });
+
+    this.produitsService.produitsUpdate.subscribe(() => {
+      this.produits = this.produitsService.getProduits(this.cataloguesService.currentCatalogue)
+    })
   }
 }
