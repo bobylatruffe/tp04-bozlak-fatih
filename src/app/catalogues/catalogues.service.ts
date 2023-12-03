@@ -1,3 +1,5 @@
+import {EventEmitter} from "@angular/core";
+
 export interface CataloguesModel {
   id: number,
   titre: string,
@@ -33,7 +35,13 @@ export class CataloguesService {
     }
   ];
 
+  categorieSelectionnee: EventEmitter<string> = new EventEmitter<string>();
+
   getCataloguesItems(): CataloguesModel[] {
     return this.cataloguesItems;
+  }
+
+  onCategorieSelectionnee(whichCategorie:string) {
+    this.categorieSelectionnee.emit(whichCategorie);
   }
 }

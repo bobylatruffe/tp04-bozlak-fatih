@@ -1,0 +1,11 @@
+.produits {
+  /*border: solid 1px red;*/
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+
+
+  width: 65vw;
+}

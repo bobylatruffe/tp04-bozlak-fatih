@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {CataloguesModel} from "../catalogues.service";
+import {CataloguesModel, CataloguesService} from "../catalogues.service";
 
 @Component({
   selector: 'app-catalogue',
@@ -8,4 +8,12 @@ import {CataloguesModel} from "../catalogues.service";
 })
 export class CatalogueComponent {
   @Input() catalogue!: CataloguesModel;
+
+  constructor(private cataloguesService: CataloguesService) {
+
+  }
+
+  onCatalogueSelectionee() {
+    this.cataloguesService.onCategorieSelectionnee(this.catalogue.titre);
+  }
 }

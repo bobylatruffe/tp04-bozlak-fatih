@@ -5,7 +5,6 @@ import {CataloguesModel, CataloguesService} from "./catalogues.service";
   selector: 'app-catalogues',
   templateUrl: './catalogues.component.html',
   styleUrl: './catalogues.component.css',
-  providers: [CataloguesService]
 })
 export class CataloguesComponent implements OnInit {
   cataloguesItems: CataloguesModel[] = [];
