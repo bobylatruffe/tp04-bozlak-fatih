@@ -1,0 +1,8 @@
+#cataloguesItems {
+  /*border: solid 1px red;*/
+  width: 30vw;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: right;
+}

@@ -3,14 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CatalogueComponent } from './catalogues/catalogue/catalogue.component';
+import {NgOptimizedImage} from "@angular/common";
+import { CataloguesComponent } from './catalogues/catalogues.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CatalogueComponent,
+    CataloguesComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgOptimizedImage
   ],
   providers: [],
   bootstrap: [AppComponent]
