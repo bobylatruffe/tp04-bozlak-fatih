@@ -31,7 +31,7 @@ export class CataloguesService {
       this.isConnected = isConnected;
 
       if (this.isConnected) {
-        this.http.get<CataloguesModel[]>('http://localhost:443/api/catalogue').subscribe(data => {
+        this.http.get<CataloguesModel[]>('https://tp02-bozlak-fatih.onrender.com/api/catalogue').subscribe(data => {
           this.cataloguesItems = data;
           console.log(this.cataloguesItems)
           this.newItemsArrived.emit();

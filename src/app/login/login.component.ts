@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   login(login: string, password: string) {
     const body = {login: login, password: password};
-    this.http.post('http://localhost:443/api/login/', body, {observe: "response"}).subscribe(
+    this.http.post('https://tp02-bozlak-fatih.onrender.com/api/login/', body, {observe: "response"}).subscribe(
       response => {
         console.log(response.status);
         console.log(response.body);
