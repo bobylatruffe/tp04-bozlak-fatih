@@ -1,4 +1,8 @@
-import {EventEmitter, Injectable} from "@angular/core";
+import {EventEmitter, Injectable, OnInit, Output} from "@angular/core";
+import {SelecteurPanier} from "../header/panier/panier.model";
+import {Observable} from "rxjs";
+import {Select} from "@ngxs/store";
+import {HttpClient} from "@angular/common/http";
 
 export interface CataloguesModel {
   id: number,
@@ -9,36 +13,36 @@ export interface CataloguesModel {
 
 @Injectable()
 export class CataloguesService {
+  newItemsArrived: EventEmitter<any> = new EventEmitter<any>()
+
+  isConnected: boolean = false;
+
+  @Select(SelecteurPanier.isConnected)
+  isConnected$: Observable<boolean> | undefined;
+
   currentCatalogue: string = "";
 
-  cataloguesItems: CataloguesModel[] = [
-    {
-      "id": 1,
-      "titre": "Consoles & Jeux Vidéo",
-      "description": "Produits liés au gaming, incluant diverses consoles de jeux, jeux vidéo pour différentes plateformes, et accessoires de gaming comme les manettes et les casques.",
-      "imgPath": "VideoGame.png"
-    },
-    {
-      "id": 2,
-      "titre": "High-Tech",
-      "description": "Articles technologiques modernes tels que smartphones, ordinateurs portables, montres intelligentes, écouteurs et appareils photo numériques.",
-      "imgPath": "HighTech.png"
-    },
-    {
-      "id": 3,
-      "titre": "Jardin & Bricolage",
-      "description": "Outils et équipements pour le jardinage et le bricolage, incluant des outils de jardin, plantes, meubles d'extérieur, et outils pour divers projets de bricolage.",
-      "imgPath": "GardenDiy.png"
-    },
-    {
-      "id": 4,
-      "titre": "Auto-Moto",
-      "description": "Accessoires et pièces pour automobiles et motos, y compris des pièces de rechange, outils de maintenance, accessoires de tuning, et équipements de sécurité comme les casques.",
-      "imgPath": "AutoMoto.png"
-    }
-  ];
+  cataloguesItems: CataloguesModel[] = [];
 
   categorieSelectionnee: EventEmitter<string> = new EventEmitter<string>();
+
+  constructor(private http: HttpClient) {
+    this.isConnected$?.subscribe((isConnected) => {
+      this.isConnected = isConnected;
+
+      if (this.isConnected) {
+        this.http.get<CataloguesModel[]>('http://localhost:443/api/catalogue').subscribe(data => {
+          this.cataloguesItems = data;
+          console.log(this.cataloguesItems)
+          this.newItemsArrived.emit();
+        })
+      }
+    })
+  }
+
+  estConnecte() {
+    console.log(this.isConnected)
+  }
 
   getCataloguesItems(): CataloguesModel[] {
     return this.cataloguesItems;

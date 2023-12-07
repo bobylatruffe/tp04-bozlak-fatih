@@ -1,0 +1,6 @@
+<div class="login" [hidden]="isConnected">
+  <input type="text" placeholder="Login" #loginInput/>
+  <input type="password" placeholder="Mot de passe " #passwordInput/>
+
+  <button type="button" (click)="login(loginInput.value, passwordInput.value)">Connextion</button>
+</div>

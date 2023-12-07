@@ -14,6 +14,10 @@ import {PanierComponent} from './header/panier/panier.component';
 import {NgxsModule} from "@ngxs/store";
 import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {PanierState} from "./header/panier/panier.state";
+import {LoginComponent} from './login/login.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {ApiHttpInterceptor} from "./httpInterceptor";
+
 
 @NgModule({
   declarations: [
@@ -24,16 +28,18 @@ import {PanierState} from "./header/panier/panier.state";
     FooterComponent,
     ProduitsComponent,
     ProduitComponent,
-    PanierComponent
+    PanierComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgOptimizedImage,
     NgxsModule.forRoot([PanierState]),
-    NgxsReduxDevtoolsPluginModule.forRoot()
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: ApiHttpInterceptor, multi: true},ApiHttpInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule {

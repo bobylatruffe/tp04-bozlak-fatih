@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CataloguesModel, CataloguesService} from "./catalogues.service";
+import {HttpInterceptor} from "@angular/common/http";
 
 @Component({
   selector: 'app-catalogues',
@@ -13,6 +14,13 @@ export class CataloguesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cataloguesItems = this.cataloguesServices.getCataloguesItems();
+    this.cataloguesServices.newItemsArrived.subscribe(() => {
+      this.cataloguesItems = this.cataloguesServices.getCataloguesItems();
+    })
+  }
+
+  newItemsArrived() {
     this.cataloguesItems = this.cataloguesServices.getCataloguesItems();
   }
 }
